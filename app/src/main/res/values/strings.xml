@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">YearOfActivity</string>
+    <string name="month1_name">Styczeń</string>
+    <string name="month2_name">Luty</string>
+    <string name="month3_name">Marzec</string>
+    <string name="month4_name">Kwiecień</string>
+    <string name="month5_name">Maj</string>
+    <string name="month6_name">Czerwiec</string>
+    <string name="month7_name">Lipiec</string>
+    <string name="month8_name">Sierpień</string>
+    <string name="month9_name">Wrzesień</string>
+    <string name="month10_name">Październik</string>
+    <string name="month11_name">Listopad</string>
+    <string name="month12_name">Grudzień</string>
+    <string name="arrow_back"><![CDATA[<-]]></string>
+    <string name="arrow_forward"><![CDATA[->]]></string>
+</resources>
