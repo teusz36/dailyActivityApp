@@ -1,5 +1,6 @@
-package com.example.yearofactivity.ui;
+package com.example.yearofactivity.ui.year;
 
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,17 +14,19 @@ public class YearMonthViewHolder extends RecyclerView.ViewHolder implements View
     public final View parentView;
     public final TextView dayOfMonth;
     private final YearMonthAdapter.OnItemListener onItemListener;
+    private int monthNumber;
 
-    public YearMonthViewHolder(@NonNull View itemView, YearMonthAdapter.OnItemListener onItemListener) {
+    public YearMonthViewHolder(@NonNull View itemView, YearMonthAdapter.OnItemListener onItemListener, int monthNumber) {
         super(itemView);
         parentView = itemView.findViewById(R.id.callendarCellParentView_year);
         dayOfMonth = itemView.findViewById(R.id.cellDayText_year);
+        this.monthNumber = monthNumber;
         this.onItemListener = onItemListener;
         itemView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        onItemListener.onItemClick(getAdapterPosition(), (String) dayOfMonth.getText());
+        onItemListener.onItemClick(getAdapterPosition(), (String) dayOfMonth.getText(), monthNumber);
     }
 }

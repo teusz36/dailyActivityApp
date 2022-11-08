@@ -1,4 +1,4 @@
-package com.example.yearofactivity.ui;
+package com.example.yearofactivity.ui.year;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -32,10 +32,10 @@ public class YearMonthAdapter extends RecyclerView.Adapter<YearMonthViewHolder> 
     @Override
     public YearMonthViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.callendar_cell_year, parent, false);
+        View view = inflater.inflate(R.layout.callendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (int) (parent.getHeight() * 0.166666666);
-        return new YearMonthViewHolder(view, onItemListener);
+        return new YearMonthViewHolder(view, onItemListener, monthNumber);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class YearMonthAdapter extends RecyclerView.Adapter<YearMonthViewHolder> 
         /*
         if(position % 7 == 6) {
             holder.dayOfMonth.setTextColor(Color.RED);
-        }
+        }*/
         try {
             if (days.get(position).getDayOfMonth() == ChosenDay.getDayNr() &&
                     monthNumber == ChosenDay.getMonthNr() &&
@@ -60,7 +60,7 @@ public class YearMonthAdapter extends RecyclerView.Adapter<YearMonthViewHolder> 
         }
         catch (NullPointerException nullPointerException){
             //dzień z innego miesiaca
-        }*/
+        }
     }
 
     @Override
@@ -69,7 +69,7 @@ public class YearMonthAdapter extends RecyclerView.Adapter<YearMonthViewHolder> 
     }
 
     public interface OnItemListener {
-        void onItemClick(int position, String date);
+        void onItemClick(int position, String date, int monthNumber);
     }
 
 }

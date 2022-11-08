@@ -80,6 +80,11 @@ public class ChosenDay {
         }
     }
 
+    public static void setChosenDayMonth(int monthNr) {
+        setChosenDay(ChosenDay.getDayNr(), monthNr, ChosenDay.getYearNr());
+        System.out.println(ChosenDay.getMonthName());
+    }
+
     public static String getDayName() {
         return dayName;
     }

@@ -4,16 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.yearofactivity.ui.YearMonthAdapter;
+import com.example.yearofactivity.ui.month.MonthActivity;
+import com.example.yearofactivity.ui.year.YearMonthAdapter;
+import com.example.yearofactivity.ui.day.ChosenDay;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,11 +42,15 @@ public class MainActivity extends AppCompatActivity {
     Button buttonActivityPrev;
     Button buttonActivityNext;
     public static LocalDate selectedDate;
+    private LinearLayout linearLayoutMonth1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Calendar calendar = Calendar.getInstance();
+        ChosenDay.setChosenDay(calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
 
         selectedDate = LocalDate.now();
         selectedDate =  selectedDate.minusMonths(selectedDate.getMonthValue() - 1);
@@ -64,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         buttonYearNext = findViewById(R.id.buttonYearNext);
         buttonActivityPrev = findViewById(R.id.buttonActivityPrev);
         buttonActivityNext = findViewById(R.id.buttonActivityNext);
+        linearLayoutMonth1 = findViewById(R.id.linearLayoutMonth1);
 
         buttonYearPrev.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,10 +89,8 @@ public class MainActivity extends AppCompatActivity {
         buttonYearNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(selectedDate);
                 selectedDate = selectedDate.plusYears(1);
                 selectedDate =  selectedDate.minusMonths(selectedDate.getMonthValue() - 1);
-                System.out.println(selectedDate);
                 setMonths();
             }
         });
@@ -106,8 +114,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onItemClick(int i, String s) {
-        System.out.println("Klikło: " + i + " :: " + s);
+    public void onItemClick(int i, String s, int monthNumber) {
+        ChosenDay.setChosenDayMonth(monthNumber);
+        startActivity(new Intent(getApplicationContext(), MonthActivity.class));
     }
 
     private ArrayList<LocalDate> daysInMonthArray(LocalDate date) {
@@ -126,5 +135,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return daysInMonthArray;
+    }
+
+    public void monthClicked(View v) {
+        String numberWithTrash = v.toString().split("linearLayoutMonth")[1];
+        int monthNumber = Integer.parseInt(numberWithTrash.substring(0, numberWithTrash.length()-1));
+        ChosenDay.setChosenDayMonth(monthNumber);
+        startActivity(new Intent(getApplicationContext(), MonthActivity.class));
     }
 }
