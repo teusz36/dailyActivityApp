@@ -1,4 +1,4 @@
-package com.example.yearofactivity;
+package com.example.yearofactivity.ui.year;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.yearofactivity.R;
 import com.example.yearofactivity.ui.month.MonthActivity;
-import com.example.yearofactivity.ui.year.YearMonthAdapter;
 import com.example.yearofactivity.ui.day.ChosenDay;
 
 import java.time.LocalDate;
@@ -20,7 +20,7 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class YearActivity extends AppCompatActivity {
 
     private RecyclerView rvm1;
     private RecyclerView rvm2;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_year);
 
         Calendar calendar = Calendar.getInstance();
         ChosenDay.setChosenDay(calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             if(selectedDate.getMonthValue() < 12) {
                 selectedDate = selectedDate.plusMonths(1);
             }
-            YearMonthAdapter yearMonthAdapter = new YearMonthAdapter(daysInMonth, i + 1, selectedDate.getYear(), this::onItemClick);
+            YearAdapter yearMonthAdapter = new YearAdapter(daysInMonth, i + 1, selectedDate.getYear(), this::onItemClick);
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
             tableOfRecyclerViews[i].setLayoutManager(layoutManager);
             tableOfRecyclerViews[i].setAdapter(yearMonthAdapter);
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onItemClick(int i, String s, int monthNumber) {
-        ChosenDay.setChosenDayMonth(monthNumber);
+        ChosenDay.setChosenDay(ChosenDay.getDayNr(), monthNumber, Integer.parseInt(textViewYear.getText().toString()));
         startActivity(new Intent(getApplicationContext(), MonthActivity.class));
     }
 
@@ -140,7 +140,17 @@ public class MainActivity extends AppCompatActivity {
     public void monthClicked(View v) {
         String numberWithTrash = v.toString().split("linearLayoutMonth")[1];
         int monthNumber = Integer.parseInt(numberWithTrash.substring(0, numberWithTrash.length()-1));
-        ChosenDay.setChosenDayMonth(monthNumber);
+        ChosenDay.setChosenDay(ChosenDay.getDayNr(), monthNumber, Integer.parseInt(textViewYear.getText().toString()));
         startActivity(new Intent(getApplicationContext(), MonthActivity.class));
     }
 }
+
+
+
+
+
+
+
+
+
+

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yearofactivity.R;
-
+import com.example.yearofactivity.ui.day.ChosenDay;
 
 
 import java.time.LocalDate;
@@ -43,11 +43,12 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthViewHolder> {
         } else {
             holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
         }
-        if(position % 7 == 6) {
-            holder.dayOfMonth.setTextColor(Color.RED);
-        }
         try {
             //TODO tła dni z aktywnością
+            if(date.getDayOfMonth() == ChosenDay.getDayNr()) {
+                holder.parentView.setBackgroundColor(Color.parseColor("#49eb74"));
+
+            }
         }
         catch (NullPointerException nullPointerException){
             //dzień z innego miesiaca

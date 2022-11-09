@@ -1,6 +1,5 @@
 package com.example.yearofactivity.ui.year;
 
-import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,15 +7,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.yearofactivity.R;
 
-public class YearMonthViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class YearViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
 
     public final View parentView;
     public final TextView dayOfMonth;
-    private final YearMonthAdapter.OnItemListener onItemListener;
+    private final YearAdapter.OnItemListener onItemListener;
     private int monthNumber;
 
-    public YearMonthViewHolder(@NonNull View itemView, YearMonthAdapter.OnItemListener onItemListener, int monthNumber) {
+    public YearViewHolder(@NonNull View itemView, YearAdapter.OnItemListener onItemListener, int monthNumber) {
         super(itemView);
         parentView = itemView.findViewById(R.id.callendarCellParentView_year);
         dayOfMonth = itemView.findViewById(R.id.cellDayText_year);

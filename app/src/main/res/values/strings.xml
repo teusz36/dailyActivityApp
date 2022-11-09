@@ -14,4 +14,7 @@
     <string name="month12_name">Grudzień</string>
     <string name="arrow_back"><![CDATA[<-]]></string>
     <string name="arrow_forward"><![CDATA[->]]></string>
+    <string name="add">Dodaj</string>
+    <string name="set">Ustaw</string>
+    <string name="meters">metrów</string>
 </resources>

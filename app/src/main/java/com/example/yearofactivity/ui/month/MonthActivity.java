@@ -5,8 +5,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yearofactivity.R;
+import com.example.yearofactivity.activity.DayManageActivity;
 import com.example.yearofactivity.ui.day.ChosenDay;
+import com.example.yearofactivity.ui.year.YearActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -32,11 +35,18 @@ public class MonthActivity extends AppCompatActivity {
         textViewMonthName = findViewById(R.id.textViewMonthName);
         selectedDate = ChosenDay.getDate();
 
+        textViewMonthName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), YearActivity.class));
+            }
+        });
+
         setMonthView();
     }
 
     private void setMonthView() {
-        textViewMonthName.setText(ChosenDay.getMonthName());
+        textViewMonthName.setText(ChosenDay.getMonthName() + " " + ChosenDay.getYearNr());
         ArrayList<LocalDate> daysInMonth = daysInMonthArray(selectedDate);
 
         MonthAdapter monthAdapter = new MonthAdapter(daysInMonth, this::onItemClick);
@@ -74,11 +84,8 @@ public class MonthActivity extends AppCompatActivity {
 
     public void onItemClick(int position, String dayText) {
         if(!dayText.equals("")) {
-            String message = "Selected date: " + dayText + " " + monthFromDate(selectedDate) + " " + yearFromDate(selectedDate);
-            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
             ChosenDay.setChosenDay(Integer.parseInt(dayText), selectedDate.getMonthValue(), selectedDate.getYear());
-            System.out.println(dayText + " " + selectedDate.getMonthValue() + " " + selectedDate.getYear());
-            setMonthView();
+            startActivity(new Intent(getApplicationContext(), DayManageActivity.class));
         }
     }
 
